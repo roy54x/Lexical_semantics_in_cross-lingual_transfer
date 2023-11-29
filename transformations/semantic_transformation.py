@@ -32,21 +32,24 @@ def transform_sentences_semantic(source_sentences, target_sentences, source_lang
     if aligner is None:
         aligner = simalign.SentenceAligner(model="xlmr", token_type="bpe", matching_methods="a", device="cuda:0")
     transformed_sentences = []
+    processed_alignments = []
     for sentence_idx, (source_sentence, target_sentence) in enumerate(
             zip(source_tokenized_sentences, target_tokenized_sentences)):
         print(sentence_idx, source_sentences[sentence_idx])
         print(sentence_idx, target_sentences[sentence_idx])
-        try:
-            if no_lemmas:
-                source_words, source_lemmas = source_sentence, source_sentence
-                target_words, target_lemmas = target_sentence, target_sentence
-            else:
-                source_words, source_lemmas = [x[0] for x in source_sentence], [x[1] for x in source_sentence]
-                target_words, target_lemmas = [x[0] for x in target_sentence], [x[1] for x in target_sentence]
-            sentence_alignment = aligner.get_word_aligns(source_words, target_words)['inter']
-            sentence_alignment = filter_only_1_to_1_alignment(sentence_alignment, check2to1=False)
 
+        if no_lemmas:
+            source_words, source_lemmas = source_sentence, source_sentence
+            target_words, target_lemmas = target_sentence, target_sentence
+        else:
+            source_words, source_lemmas = [x[0] for x in source_sentence], [x[1] for x in source_sentence]
+            target_words, target_lemmas = [x[0] for x in target_sentence], [x[1] for x in target_sentence]
+        sentence_alignment = aligner.get_word_aligns(source_words, target_words)['inter']
+        sentence_alignment = filter_only_1_to_1_alignment(sentence_alignment, check2to1=False)
+
+        try:
             transformed_sentence = []
+            processed_sentence_alignment = []
             for token_idx, (source_word, source_lemma) in enumerate(zip(source_words, source_lemmas)):
 
                 is_word_in_dic = source_lemma in lemmas_dic.keys()
@@ -64,6 +67,7 @@ def transform_sentences_semantic(source_sentences, target_sentences, source_lang
                     if target_lemmas_aligned_dic:
                         best_lemma = max(target_lemmas_aligned_dic.items(), key=operator.itemgetter(1))[0]
                         best_alignment = aligned_lemmas_and_words[best_lemma]
+                        processed_sentence_alignment.append((token_idx, target_words.index(best_alignment)))
 
                     # option 2: a lemma in the dictionary is found in the target sentence and there is no better
                     # alignment to this lemma out of all the source lemmas
@@ -78,6 +82,7 @@ def transform_sentences_semantic(source_sentences, target_sentences, source_lang
                             is_lemma_not_aligned = target_lemmas.index(best_lemma) not in [alignment[1] for alignment in sentence_alignment]
                         if is_best_source_to_align_to_this_lemma and is_lemma_not_aligned:
                             best_alignment = target_words[target_lemmas.index(best_lemma)]
+                            processed_sentence_alignment.append((token_idx, target_words.index(best_alignment)))
 
                         # option 3: no lemma is found in the target sentence, and therefore
                         # we pick the most common aligned word in the "word_dic"
@@ -100,12 +105,14 @@ def transform_sentences_semantic(source_sentences, target_sentences, source_lang
         except Exception as e:
             print(e)
             transformed_sentence = source_sentences[sentence_idx]
+            processed_sentence_alignment = sentence_alignment
 
         transformed_sentence = post_process_sentence(post_process_sentence(transformed_sentence))
         print(sentence_idx, transformed_sentence)
         print()
         transformed_sentences.append(transformed_sentence)
-    return transformed_sentences
+        processed_alignments.append(processed_sentence_alignment)
+    return transformed_sentences, processed_alignments
 
 
 def tokenize_sentences(sentences, language, pipeline=None):
