@@ -37,7 +37,7 @@ def calculate_f1_score(gold_alignments, predicted_alignments):
     recall = true_positive / (true_positive + false_negative) if true_positive + false_negative > 0 else 0
 
     f1 = 2 * (precision * recall) / (precision + recall) if precision + recall > 0 else 0
-    return f1
+    return f1, true_positive, false_positive, false_negative
 
 
 en_sentences = read_conllu_sentences(r"C:\Users\RoyIlani\pythonProject\data\UD_data\en_pud-ud-test.conllu")
@@ -61,8 +61,8 @@ es_sentences_joined = [" ".join(sentence) for sentence in es_sentences]
 _, my_alignments = transform_sentences_semantic(en_sentences_joined, es_sentences_joined, source_language="en",
                                                 target_language="es", word_dic=word_dic, no_lemmas=True)
 
-simalign_F1 = calculate_f1_score(gold_alignments, simalign_alignments)
-my_F1 = calculate_f1_score(gold_alignments, my_alignments)
+simalign_f1, simalign_true_positive, simalign_false_positive, simalign_false_negative = calculate_f1_score(gold_alignments, simalign_alignments)
+my_f1, my_true_positive, my_false_positive, my_false_negative = calculate_f1_score(gold_alignments, my_alignments)
 
-print("simalign F1 score is: " + str(simalign_F1))
-print("my F1 score is: " + str(my_F1))
+print("simalign F1 score is: " + str(simalign_f1))
+print("my F1 score is: " + str(my_f1))
