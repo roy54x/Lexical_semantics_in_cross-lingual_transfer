@@ -3,10 +3,8 @@ import os
 
 from conllu import parse
 from simalign import simalign
-from sklearn.metrics import f1_score
 
-from transformations.semantic_transformation import filter_only_1_to_1_alignment, get_word_alignments, \
-    transform_sentences_semantic
+from transformations.semantic_transformation import filter_only_1_to_1_alignment, transform_sentences_semantic
 
 
 def read_conllu_sentences(file_path):
@@ -14,10 +12,6 @@ def read_conllu_sentences(file_path):
         data = file.read()
     sentences = [[token["form"] for token in tree] for tree in parse(data)]
     return sentences
-
-
-def get_all_possible_sentence_alignments(len_source, len_target):
-    return [(i, j) for i in range(len_source) for j in range(len_target)]
 
 
 def get_alignments_as_tuples(alignments_dic):
@@ -29,20 +23,25 @@ def get_alignments_as_tuples(alignments_dic):
     return alignments_as_tuples
 
 
-def calculate_f1_score(all_possible_alignments, gold_alignments, predicted_alignments):
-    sum_f1_scores = 0
-    for all_sentence_alignments, gold_sentence_alignments, predicted_sentence_alignments in zip(all_possible_alignments,
-                                                                                                gold_alignments, predicted_alignments):
-        true_flat = [1 if item in gold_sentence_alignments else 0 for item in all_sentence_alignments]
-        predicted_flat = [1 if item in predicted_sentence_alignments else 0 for item in all_sentence_alignments]
-        sum_f1_scores += f1_score(true_flat, predicted_flat)
-    return sum_f1_scores/len(all_possible_alignments)
+def calculate_f1_score(gold_alignments, predicted_alignments):
+    true_positive = 0
+    false_positive = 0
+    false_negative = 0
+
+    for gold_sentence_alignments, predicted_sentence_alignments in zip(gold_alignments, predicted_alignments):
+        true_positive += len(set(gold_sentence_alignments) & set(predicted_sentence_alignments))
+        false_positive += len(set(predicted_sentence_alignments) - set(gold_sentence_alignments))
+        false_negative += len(set(gold_sentence_alignments) - set(predicted_sentence_alignments))
+
+    precision = true_positive / (true_positive + false_positive) if true_positive + false_positive > 0 else 0
+    recall = true_positive / (true_positive + false_negative) if true_positive + false_negative > 0 else 0
+
+    f1 = 2 * (precision * recall) / (precision + recall) if precision + recall > 0 else 0
+    return f1
 
 
 en_sentences = read_conllu_sentences(r"C:\Users\RoyIlani\pythonProject\data\UD_data\en_pud-ud-test.conllu")
 es_sentences = read_conllu_sentences(r"C:\Users\RoyIlani\pythonProject\data\UD_data\es_pud-ud-test.conllu")
-all_possible_alignments = [get_all_possible_sentence_alignments(len(en_sentence), len(es_sentence))
-                           for en_sentence, es_sentence in zip(en_sentences, es_sentences)]
 
 f = open('pud_data.json', encoding="utf8")
 en_es_data = json.load(f)["en-es"]
@@ -62,8 +61,8 @@ es_sentences_joined = [" ".join(sentence) for sentence in es_sentences]
 _, my_alignments = transform_sentences_semantic(en_sentences_joined, es_sentences_joined, source_language="en",
                                                 target_language="es", word_dic=word_dic, no_lemmas=True)
 
-simalign_F1 = calculate_f1_score(all_possible_alignments, gold_alignments, simalign_alignments)
-my_F1 = calculate_f1_score(all_possible_alignments, gold_alignments, my_alignments)
+simalign_F1 = calculate_f1_score(gold_alignments, simalign_alignments)
+my_F1 = calculate_f1_score(gold_alignments, my_alignments)
 
 print("simalign F1 score is: " + str(simalign_F1))
 print("my F1 score is: " + str(my_F1))
