@@ -15,10 +15,6 @@ def read_conllu_sentences(file_path):
     return sentences
 
 
-def get_all_possible_sentence_alignments(len_source, len_target):
-    return [(i, j) for i in range(len_source) for j in range(len_target)]
-
-
 def get_alignments_as_tuples(alignments_dic):
     alignments_as_tuples = []
     for key, values in alignments_dic.items():
@@ -28,10 +24,24 @@ def get_alignments_as_tuples(alignments_dic):
     return alignments_as_tuples
 
 
-en_sentences = read_conllu_sentences(r"data\UD_data\en_pud-ud-test.conllu")
-es_sentences = read_conllu_sentences(r"data\UD_data\es_pud-ud-test.conllu")
-all_possible_alignments = [get_all_possible_sentence_alignments(len(en_sentence), len(es_sentence))
-                           for en_sentence, es_sentence in zip(en_sentences, es_sentences)]
+def calculate_f1_score(true_alignments, predicted_alignments):
+    true_set = set(true_alignments)
+    predicted_set = set(predicted_alignments)
+
+    true_positive = len(true_set.intersection(predicted_set))
+    false_positive = len(predicted_set - true_set)
+    false_negative = len(true_set - predicted_set)
+
+    precision = true_positive / (true_positive + false_positive) if true_positive + false_positive > 0 else 0
+    recall = true_positive / (true_positive + false_negative) if true_positive + false_negative > 0 else 0
+
+    f1 = 2 * (precision * recall) / (precision + recall) if precision + recall > 0 else 0
+
+    return f1
+
+
+en_sentences = read_conllu_sentences(r"C:\Users\RoyIlani\pythonProject\data\UD_data\en_pud-ud-test.conllu")
+es_sentences = read_conllu_sentences(r"C:\Users\RoyIlani\pythonProject\data\UD_data\es_pud-ud-test.conllu")
 
 f = open('pud_data.json', encoding="utf8")
 en_es_data = json.load(f)["en-es"]
@@ -43,7 +53,7 @@ simalign_alignments = [aligner.get_word_aligns(source_words, target_words)['inte
                        for source_words, target_words in zip(en_sentences, es_sentences)]
 simalign_alignments = [filter_only_1_to_1_alignment(alignment) for alignment in simalign_alignments]
 
-with open(os.path.join(r"data\alignments\en-es_alignments", "en-es_alignments_only1to1_clean_inverse_clean_inverse.json"),
+with open(os.path.join(r"C:\Users\RoyIlani\pythonProject\data\alignments\en-es_alignments", "en-es_alignments_only1to1_clean_inverse_clean_inverse.json"),
           "r") as json_file:
     word_dic = json.load(json_file)
 en_sentences_joined = [" ".join(sentence) for sentence in en_sentences]
@@ -51,5 +61,8 @@ es_sentences_joined = [" ".join(sentence) for sentence in es_sentences]
 _, my_alignments = transform_sentences_semantic(en_sentences_joined, es_sentences_joined, source_language="en",
                                                 target_language="es", word_dic=word_dic, no_lemmas=True)
 
+simalign_F1 = calculate_f1_score(gold_alignments, simalign_alignments)
+my_F1 = calculate_f1_score(gold_alignments, my_alignments)
 
-print("done")
+print("simalign F1 score is: " + str(simalign_F1))
+print("my F1 score is: " + str(my_F1))
