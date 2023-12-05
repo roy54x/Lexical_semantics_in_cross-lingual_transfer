@@ -1,2 +1,4 @@
 ﻿reordering_package
 pud_data.json
+__pycache__
+cache/trankit
