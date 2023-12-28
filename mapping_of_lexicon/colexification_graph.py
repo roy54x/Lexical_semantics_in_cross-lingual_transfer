@@ -28,9 +28,15 @@ def plot_graph(G):
 
 if __name__ == '__main__':
     main_dir = ""
-    with open(os.path.join(main_dir, "en-es.json"), "r") as json_file:
+    with open(os.path.join(main_dir, "en-zh_cn.json"), "r") as json_file:
             lemmas_dic = json.load(json_file)
-    lemmas_dic = dict(list(lemmas_dic.items())[:20])
+    keys_to_extract = ["about", "above", "across", "after", "against", "along", "among", "around", "at", "before",
+                       "behind", "below", "beneath", "beside", "between", "beyond", "but", "by", "concerning",
+                       "considering", "despite", "down", "during", "except", "for", "from", "in", "inside", "into",
+                       "like", "near", "of", "off", "on", "onto", "out", "outside", "over", "past", "regarding",
+                       "round", "since", "through", "throughout", "to", "toward", "under", "underneath", "until",
+                       "unto", "up", "upon", "with", "within", "without"]
+    lemmas_dic = {key: lemmas_dic[key] for key in keys_to_extract if key in lemmas_dic}
 
     G = get_colexification_graph(lemmas_dic)
     plot_graph(G)
