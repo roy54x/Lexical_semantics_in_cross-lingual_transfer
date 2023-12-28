@@ -14,10 +14,16 @@ def get_colexification_graph(dic):
     source_keys = list(dic.keys())
     G.add_nodes_from(source_keys)
     for source_key in source_keys:
-        for target_value in dic[source_key].keys():
-            colexifications = inverse_dic[target_value].keys()
-            G.add_edges_from({(source_key, colexification) for colexification in colexifications})
+        colexifications = get_colexifications(dic, inverse_dic, source_key)
+        G.add_edges_from({(source_key, colexification) for colexification in colexifications})
     return G
+
+
+def get_colexifications(dic, inverse_dic, word):
+    colexifications = []
+    for target_value in dic[word].keys():
+        colexifications.extend(list(inverse_dic[target_value].keys()))
+    return colexifications
 
 
 def plot_graph(G):
@@ -30,12 +36,16 @@ if __name__ == '__main__':
     main_dir = ""
     with open(os.path.join(main_dir, "en-zh_cn.json"), "r") as json_file:
             lemmas_dic = json.load(json_file)
-    keys_to_extract = ["about", "above", "across", "after", "against", "along", "among", "around", "at", "before",
+    inverse_dic = get_inverse_dic(lemmas_dic)
+    words_to_display = ["about", "above", "across", "after", "against", "along", "among", "around", "at", "before",
                        "behind", "below", "beneath", "beside", "between", "beyond", "but", "by", "concerning",
                        "considering", "despite", "down", "during", "except", "for", "from", "in", "inside", "into",
                        "like", "near", "of", "off", "on", "onto", "out", "outside", "over", "past", "regarding",
                        "round", "since", "through", "throughout", "to", "toward", "under", "underneath", "until",
                        "unto", "up", "upon", "with", "within", "without"]
+    keys_to_extract = set()
+    for word in words_to_display:
+        keys_to_extract.update(get_colexifications(lemmas_dic, inverse_dic, word))
     lemmas_dic = {key: lemmas_dic[key] for key in keys_to_extract if key in lemmas_dic}
 
     G = get_colexification_graph(lemmas_dic)
