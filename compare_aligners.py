@@ -58,8 +58,8 @@ simalign_alignments = [filter_only_1_to_1_alignment(alignment) for alignment in 
 with open(os.path.join(r"C:\Users\RoyIlani\pythonProject\data\alignments\en-es_alignments", "en-es_alignments_only1to1_clean_inverse_clean_inverse.json"),
           "r") as json_file:
     word_dic = json.load(json_file)
-_, my_alignments = transform_sentences_semantic(en_sentences, es_sentences, source_language="en",
-                                                target_language="es", word_dic=word_dic, no_lemmas=True)
+_, my_alignments = transform_sentences_semantic(en_sentences, es_sentences, source_language="english",
+                                                target_language="spanish", word_dic=word_dic, no_lemmas=True)
 
 simalign_f1, simalign_true_positive, simalign_false_positive, simalign_false_negative = calculate_f1_score(gold_alignments, simalign_alignments)
 my_f1, my_true_positive, my_false_positive, my_false_negative = calculate_f1_score(gold_alignments, my_alignments)

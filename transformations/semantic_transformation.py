@@ -67,7 +67,10 @@ def transform_sentences_semantic(source_sentences, target_sentences, source_lang
                     if target_lemmas_aligned_dic:
                         best_lemma = max(target_lemmas_aligned_dic.items(), key=operator.itemgetter(1))[0]
                         best_alignment = aligned_lemmas_and_words[best_lemma]
-                        processed_sentence_alignment.append((token_idx, target_words.index(best_alignment)))
+                        if len(aligned_indices) == 1:
+                            processed_sentence_alignment.append((token_idx, aligned_indices[0]))
+                        else:
+                            processed_sentence_alignment.append((token_idx, target_words.index(best_alignment)))
 
                     # option 2: a lemma in the dictionary is found in the target sentence and there is no better
                     # alignment to this lemma out of all the source lemmas
