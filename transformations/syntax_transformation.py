@@ -1,10 +1,8 @@
-import os
 import re
-import pandas as pd
 from trankit import Pipeline
 
 from reordering_package.ud_reorder_algo import UdReorderingAlgo
-from utils import transform_all_files, transform_all_gts, post_process_sentence
+from utils.utils import transform_all_gts, post_process_sentence
 
 pipeline = Pipeline('english')
 reorderer = UdReorderingAlgo(UdReorderingAlgo.ReorderAlgo.HUJI)

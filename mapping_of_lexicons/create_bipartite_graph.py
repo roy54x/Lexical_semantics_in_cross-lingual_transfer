@@ -97,7 +97,7 @@ def filter_only_1_to_1_alignment(sentence_alignment, check1to2=True, check2to1=T
 
 
 if __name__ == '__main__':
-    from utils import load_doc, parse_sentences_from_doc
+    from utils.utils import load_doc, parse_sentences_from_doc
 
     main_dir = r"data/europarl_data"
     source_doc_name, target_doc_name = "europarl-v7.es-en.en", "europarl-v7.es-en.es"

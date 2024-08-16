@@ -1,9 +1,6 @@
 import json
 import os
-import re
-import time
 import operator
-from collections import Counter
 
 import pandas as pd
 
@@ -12,7 +9,7 @@ import simalign
 from mapping_of_lexicons.create_bipartite_graph import filter_only_1_to_1_alignment
 from mapping_of_lexicons.graph_utils import filter_target_entropy, filter_source_entropy
 from mapping_of_lexicons.tokenize_sentences import light_tokenize_sentences, tokenize_sentences
-from utils import transform_all_gts, post_process_sentence
+from utils.utils import transform_all_gts, post_process_sentence
 
 
 def transform_sentences_semantic(source_sentences, target_sentences, source_language, target_language,
