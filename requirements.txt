@@ -1,0 +1,12 @@
+pandas~=2.2.2
+simalign~=0.4
+torch~=2.2.0+cu118
+transformers~=4.41.2
+trankit~=1.1.1
+numpy~=1.25.2
+scipy~=1.9.3
+networkx~=3.2.1
+matplotlib~=3.6.1
+jieba~=0.42.1
+tokenizers~=0.19.1
+tqdm~=4.66.2
