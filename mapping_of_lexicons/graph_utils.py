@@ -1,4 +1,5 @@
 import json
+import operator
 import os
 
 import scipy
@@ -173,3 +174,14 @@ def filter_only_synonyms(word_dic):
             new_dic[aligned_source_key] = {max_aligned_source_key_and_value[0]: max_aligned_source_key_and_value[1]}
             source_keys.remove(aligned_source_key)
     return new_dic
+
+
+def filter_source_entropy(word_dic, entropies):
+    filtered_dic = filter_by_entropy(word_dic, entropies, min_entropy=1.82, max_entropy=100.00)
+    return filtered_dic
+
+
+def filter_target_entropy(word_dic, entropies):
+    inverse_dic = get_inverse_dic(word_dic)
+    filtered_inverse_dic = filter_by_entropy(inverse_dic, entropies, min_entropy=1.235, max_entropy=100.0)
+    return get_inverse_dic(filtered_inverse_dic)

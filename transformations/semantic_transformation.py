@@ -10,6 +10,7 @@ import pandas as pd
 import simalign
 
 from mapping_of_lexicons.create_bipartite_graph import filter_only_1_to_1_alignment
+from mapping_of_lexicons.graph_utils import filter_target_entropy, filter_source_entropy
 from mapping_of_lexicons.tokenize_sentences import light_tokenize_sentences, tokenize_sentences
 from utils import transform_all_gts, post_process_sentence
 
@@ -144,16 +145,12 @@ if __name__ == '__main__':
     entropies = {word: entropy for word, entropy in
                  zip(entropies_df["words"].to_list(), entropies_df["entropies"].to_list())}
 
+    def _filter_source_entropy(word_dic):
+        return filter_source_entropy(word_dic, entropies)
 
-    def filter_source_entropy(word_dic):
-        filtered_dic = filter_by_entropy(word_dic, entropies, min_entropy=1.82, max_entropy=100.00)
-        return filtered_dic
+    def _filter_target_entropy(word_dic):
+        return filter_target_entropy(word_dic, entropies)
 
-
-    def filter_target_entropy(word_dic):
-        inverse_dic = get_inverse_dic(word_dic)
-        filtered_inverse_dic = filter_by_entropy(inverse_dic, entropies, min_entropy=1.235, max_entropy=100.0)
-        return get_inverse_dic(filtered_inverse_dic)
 
 
     transform_all_gts(r"C:\Users\RoyIlani\pythonProject\data\TED_data\TED_en-zh_cn_gt\train_set",

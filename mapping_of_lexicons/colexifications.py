@@ -4,8 +4,10 @@ import json
 import networkx as nx
 import matplotlib.pyplot as plt
 
+from mapping_of_lexicons.graph_utils import get_inverse_dic
+
 sys.path.insert(0, r"C:\Users\RoyIlani\pythonProject\Lexical_semantics_in_cross-lingual_transfer")
-from transformations.semantic_transformation import get_inverse_dic
+
 
 
 def get_colexification_graph(dic):
