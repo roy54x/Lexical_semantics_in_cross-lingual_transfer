@@ -1,3 +1,7 @@
+from trankit import Pipeline
+import jieba
+
+
 def tokenize_sentences(sentences, language, pipeline=None):
     if not pipeline:
         pipeline = Pipeline(language, gpu=True)
