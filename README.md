@@ -25,29 +25,7 @@ Download a parallel corpus for the two languages you wish to map their lexicons.
 
 ## Extracting the Bipartite Graph
 
-\begin{figure}
-\begin{tikzpicture}[node distance={5mm}, main/.style = {draw, circle}, every fit/.style={ellipse,draw,inner sep=-2pt,text width=2cm}]
-
-\begin{scope}[start chain=going below,node distance=5mm]
-\node[main] (1) {\textit{for}}; 
-\node[main] (2) [below=1.0] {\textit{by}}; 
-\end{scope}
-
-\begin{scope}[xshift=5cm,yshift=0cm,start chain=going below,node distance=5mm]
-\node[main] (3) {\textit{por}};
-\node[main] (4) [below=1.0] {\textit{para}};
-\end{scope}
-
-\node [fit=(1) (2),label=above:\textit{English}] {};
-\node [fit=(3) (4),label=above:\textit{Spanish}] {};
-
-\draw (1) -- node[midway, above, sloped]{85303} (3);
-\draw (1) -- node[midway, above left, sloped]{175771} (4);
-\draw (2) -- node[midway, below left, sloped]{93781} (3);
-
-\end{tikzpicture} 
-\caption{Illustration of the weighted sub-graph which results from the \href{https://www.statmt.org/europarl/}{\textit{Europarl}} parallel corpus. The edges represent the possibility that two words are translations of each other. The weights denote the number of occurrences that each word pair is aligned in the bitext.}\label{fig:weighted_subgraph}
-\end{figure}
+![Bipartite Graph Example](https://github.com/user-attachments/assets/6e755d32-4ab2-44d5-a05a-f014446f2cb3)
 
 The bipartite graph represents the mapping between the lexicons of two languages, denoted as $L_s$ (source language) and $L_t$ (target language). Formally, we define a weighted bipartite graph $G = (V_s, V_t, E, w)$, where:
 
