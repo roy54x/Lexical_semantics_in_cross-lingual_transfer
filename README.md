@@ -30,7 +30,7 @@ The bipartite graph represents the mapping between the lexicons of two languages
 - $V_s$ is the set of words in the lexicon of $L_s$,
 - $V_t$ is the set of words in the lexicon of $L_t$,
 - $E$ is the set of edges where a pair $(v, u) \in V_s \times V_t $ exists if the word $v$ in $L_s$ is aligned with the word $u$ in $L_t$ in at least one instance in the bitext,
-- $w: E \rightarrow \mathbb{N}^+ $ is a weight function assigning the number of times each word pair is aligned in the bitext.
+- $w:E \rightarrow \mathbb{N}^+$ is a weight function assigning the number of times each word pair is aligned in the bitext.
 
 This construction captures the relationship between the lexical semantics of the two languages. 
 
