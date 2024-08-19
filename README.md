@@ -1,6 +1,6 @@
 # Lexical_Semantics_in_Cross-Lingual_Transfer
 
-This repository provides the code to map lexicons of two languages, as discussed in [Lexical Semantics in Cross-Lingual Transfer](https://arxiv.org/abs/2408.07599v1). The main functionalities include extracting bipartite graphs, calculating translation entropy, and generating colexification graphs.
+This repository provides the code to map lexicons of two languages, as discussed in [Assessing the Role of Lexical Semantics in Cross-lingual Transfer through Controlled Manipulations](https://arxiv.org/abs/2408.07599v1). The main functionalities include extracting bipartite graphs, calculating translation entropy, and generating colexification graphs.
 
 ## Table of Contents
 1. [Installation](#installation)
