@@ -28,6 +28,7 @@ Download a parallel corpus for the two languages you wish to map their lexicons.
 To extract the bipartite graph that maps the two lexicons (see an example in Figure 1), you can follow this code example:
 
 ```bash
+import os
 from utils.utils import load_doc, parse_sentences_from_doc
 from mapping_of_lexicons.create_bipartite_graph import create_bipartite_graph
 
