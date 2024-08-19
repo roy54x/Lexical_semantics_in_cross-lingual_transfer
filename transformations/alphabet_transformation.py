@@ -1,4 +1,4 @@
-from utils import transform_all_gts, transform_all_files
+from utils.utils import transform_all_gts
 
 
 def transform_sentences_alphabet(sentences, language="greek"):
