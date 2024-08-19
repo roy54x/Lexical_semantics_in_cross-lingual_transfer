@@ -17,6 +17,7 @@ First, clone the repository and install the necessary dependencies:
 git clone https://github.com/roy54x/Lexical_Semantics_in_Cross-Lingual_Transfer.git
 cd Lexical_Semantics_in_Cross-Lingual_Transfer
 pip install -r requirements.txt
+```
 
 ## Download bitext
 
