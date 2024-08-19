@@ -25,7 +25,7 @@ Download a parallel corpus for the two languages you wish to map their lexicons.
 
 ## Extracting the Bipartite Graph
 
-The bipartite graph represents the relationship between the lexicons of two languages, denoted as \( L_s \) (source language) and \( L_t \) (target language). Formally, we define a weighted bipartite graph \( G = (V_s, V_t, E, w) \), where:
+The bipartite graph represents the relationship between the lexicons of two languages, denoted as $L_s$ (source language) and $L_t$ (target language). Formally, we define a weighted bipartite graph \( G = (V_s, V_t, E, w) \), where:
 
 - \( V_s \) is the set of words in the lexicon of \( L_s \),
 - \( V_t \) is the set of words in the lexicon of \( L_t \),
@@ -39,8 +39,6 @@ This construction captures the relationship between the lexical semantics of the
 Below is an example visualization of a bipartite graph generated from the Europarl corpus:
 
 ![Bipartite Graph Example]()
-
-### Explanation
 
 ### Code Example
 
