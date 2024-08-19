@@ -31,7 +31,7 @@ To extract the bipartite graph that maps the two lexicons (see an example in Fig
 from utils.utils import load_doc, parse_sentences_from_doc
 from mapping_of_lexicons.create_bipartite_graph import create_bipartite_graph
 
-main_dir = r"data/europarl_data"
+main_dir = r"data/es-en" # Replace with the main directory of the bitext
 source_doc_name, target_doc_name = "europarl-v7.es-en.en", "europarl-v7.es-en.es"
 
 source_doc = load_doc(os.path.join(main_dir, source_doc_name))
