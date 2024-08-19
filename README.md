@@ -27,12 +27,16 @@ Download a parallel corpus for the two languages you wish to map their lexicons.
 
 <img src="https://github.com/user-attachments/assets/6e755d32-4ab2-44d5-a05a-f014446f2cb3" alt="Bipartite Graph Example" width="300">
 
+### Explanation
+
 The bipartite graph represents the mapping between the lexicons of two languages, denoted as $L_s$ (source language) and $L_t$ (target language). Formally, we define a weighted bipartite graph $G = (V_s, V_t, E, w)$, where:
 
 - $V_s$ is the set of words in the lexicon of $L_s$,
 - $V_t$ is the set of words in the lexicon of $L_t$,
 - $E$ is the set of edges where a pair $(v, u) \in V_s \times V_t$ exists if the word $v$ in $L_s$ is aligned with the word $u$ in $L_t$ in at least one instance in the bitext,
 - $w:E \rightarrow \mathbb{N}^+$ is a weight function assigning the number of times each word pair is aligned in the bitext.
+
+### Code Example
 
 To extract the bipartite graph that maps the two lexicons, use the following code:
 
