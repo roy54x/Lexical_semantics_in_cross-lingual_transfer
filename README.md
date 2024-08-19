@@ -25,22 +25,36 @@ Download a parallel corpus for the two languages you wish to map their lexicons.
 
 ## Extracting the Bipartite Graph
 
+\begin{figure}
+\begin{tikzpicture}[node distance={5mm}, main/.style = {draw, circle}, every fit/.style={ellipse,draw,inner sep=-2pt,text width=2cm}]
+
+\begin{scope}[start chain=going below,node distance=5mm]
+\node[main] (1) {\textit{for}}; 
+\node[main] (2) [below=1.0] {\textit{by}}; 
+\end{scope}
+
+\begin{scope}[xshift=5cm,yshift=0cm,start chain=going below,node distance=5mm]
+\node[main] (3) {\textit{por}};
+\node[main] (4) [below=1.0] {\textit{para}};
+\end{scope}
+
+\node [fit=(1) (2),label=above:\textit{English}] {};
+\node [fit=(3) (4),label=above:\textit{Spanish}] {};
+
+\draw (1) -- node[midway, above, sloped]{85303} (3);
+\draw (1) -- node[midway, above left, sloped]{175771} (4);
+\draw (2) -- node[midway, below left, sloped]{93781} (3);
+
+\end{tikzpicture} 
+\caption{Illustration of the weighted sub-graph which results from the \href{https://www.statmt.org/europarl/}{\textit{Europarl}} parallel corpus. The edges represent the possibility that two words are translations of each other. The weights denote the number of occurrences that each word pair is aligned in the bitext.}\label{fig:weighted_subgraph}
+\end{figure}
+
 The bipartite graph represents the mapping between the lexicons of two languages, denoted as $L_s$ (source language) and $L_t$ (target language). Formally, we define a weighted bipartite graph $G = (V_s, V_t, E, w)$, where:
 
 - $V_s$ is the set of words in the lexicon of $L_s$,
 - $V_t$ is the set of words in the lexicon of $L_t$,
 - $E$ is the set of edges where a pair $(v, u) \in V_s \times V_t$ exists if the word $v$ in $L_s$ is aligned with the word $u$ in $L_t$ in at least one instance in the bitext,
 - $w:E \rightarrow \mathbb{N}^+$ is a weight function assigning the number of times each word pair is aligned in the bitext.
-
-This construction captures the relationship between the lexical semantics of the two languages. 
-
-### Figure 1: Example Bipartite Graph
-
-Below is an example visualization of a bipartite graph generated from the Europarl corpus:
-
-![Bipartite Graph Example]()
-
-### Code Example
 
 To extract the bipartite graph that maps the two lexicons, use the following code:
 
