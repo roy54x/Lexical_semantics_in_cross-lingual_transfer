@@ -64,9 +64,28 @@ from mapping_of_lexicons.graph_utils import get_clean_dic, get_inverse_dic
 
 file_name = "europarl_en-es_alignments" # Replace with the file name
 file_path = os.path.join(main_dir, file_name + ".json")
-    with open(file_path, "r") as json_file:
-        graph = json.load(json_file)
+with open(file_path, "r") as json_file:
+    graph = json.load(json_file)
 
 clean_graph = get_clean_dic(graph) # filter edges based on source vertices
 clean_graph = get_inverse_dic(get_clean_dic(get_inverse_dic(clean_graph))) # filter edges based on target vertices
+
+with open(file_path, "w") as outfile:
+    json.dump(clean_graph, outfile)
 ```
+
+## Calculating Translation Entropy
+<img src="https://github.com/user-attachments/assets/715476e6-a699-4c80-b112-b18c208161eb" alt="Bipartite Graph Example" width="500">
+
+### Explanation
+To further appreciate the impact of the divergence between the source and the target lexicons, we introduce the concept of \textit{translation entropy}. Let $G$ be the weighted bipartite graph presented earlier, we compute the entropy for each vertex $v$ in the graph:\footnote{It does not matter whether $v\in L_s$ or $v\in L_t$.}
+\begin{equation}
+e(v) = -\sum_{u\in U_{v}}p_{v}(u)log(p_{v}(u))
+\label{eq:entropy}
+\end{equation}
+where $U_{v}$ is the subset of vertices linked to $v$, and $p_{v}$ is the following probability function:
+\begin{equation}
+p_{v}(u)=\frac{w(v,u)}{\sum_{u^\prime\in U_{v}}w(v,u^\prime)}
+\label{eq:probability-function}
+\end{equation}
+
