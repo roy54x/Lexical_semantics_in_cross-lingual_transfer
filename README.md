@@ -97,4 +97,5 @@ get_entropies(main_dir, file_name, to_json=False)
 ```
 This code will produce a csv file such as: 
 
-![image](https://github.com/user-attachments/assets/e00b82f4-2fc7-401f-959f-538fa984d2dd)
+<img src="https://github.com/user-attachments/assets/e00b82f4-2fc7-401f-959f-538fa984d2dd" alt="Bipartite Graph Example" width="250">
+
