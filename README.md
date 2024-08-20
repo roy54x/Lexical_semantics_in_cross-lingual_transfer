@@ -106,6 +106,23 @@ This code will produce a csv file such as:
 Additionally, the bipartite graph can be used to generate a colexification graph. Colexification refers to the phenomenon where different meanings are expressed by the same word in a language ([wikipedia](https://en.wikipedia.org/wiki/Colexification)), and a colexification graph captures these relationships by connecting words that share meanings across different contexts. The mapping of the two lexicons enable us to identify words in the source language which share the same translation in the target language, thus allowing us to generate a colexification graph of the source language. Combining graphs from more than one language pair may further enrich the colexification graph.
 
 ### Code Example
+```python
+from mapping_of_lexicons.colexifications import get_colexifications, get_colexification_graph, plot_graph
 
+with open(os.path.join(main_dir, file_name, ".json"), "r") as json_file:
+    bipartite_graph = json.load(json_file)
+inverse_bipartite_graph = get_inverse_dic(bipartite_graph)
+words_to_display = ["about", "above", "across", "after", "against", "along", "among", "around", "at", "before",
+                       "behind", "below", "beneath", "beside", "between", "beyond", "but", "by", "concerning",
+                       "considering", "despite", "down", "during", "except", "for", "from", "in", "inside", "into",
+                       "like", "near", "of", "off", "on", "onto", "out", "outside", "over", "past", "regarding",
+                       "round", "since", "through", "throughout", "to", "toward", "under", "underneath", "until",
+                       "unto", "up", "upon", "with", "within", "without"]
+keys_to_extract = set()
+for word in words_to_display:
+    keys_to_extract.update(get_colexifications(bipartite_graph, inverse_bipartite_graph, word))
+bipartite_graph = {key: bipartite_graph[key] for key in keys_to_extract if key in lemmas_dic}
 
-
+G = get_colexification_graph(bipartite_graph)
+plot_graph(G)
+```
