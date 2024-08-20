@@ -6,16 +6,6 @@ import scipy
 import pandas as pd
 
 
-def save_inverse_dic(main_dir, file_name):
-    file_path = os.path.join(main_dir, file_name + ".json")
-    with open(file_path, "r") as json_file:
-        dic = json.load(json_file)
-    inverse_dic = get_inverse_dic(dic)
-    output_path = os.path.join(main_dir, file_name + "_inverse.json")
-    with open(output_path, "w") as outfile:
-        json.dump(inverse_dic, outfile)
-
-
 def get_inverse_dic(dic):
     inverse_dic = {}
     for (source_key, target_val) in dic.items():
@@ -27,10 +17,17 @@ def get_inverse_dic(dic):
     return inverse_dic
 
 
-def save_clean_dic(main_dir, file_name, min_amount, min_precent):
+def save_inverse_dic(main_dir, file_name):
     file_path = os.path.join(main_dir, file_name + ".json")
     with open(file_path, "r") as json_file:
         dic = json.load(json_file)
+    inverse_dic = get_inverse_dic(dic)
+    output_path = os.path.join(main_dir, file_name + "_inverse.json")
+    with open(output_path, "w") as outfile:
+        json.dump(inverse_dic, outfile)
+
+
+def get_clean_dic(dic, min_amount, min_precent):
     clean_dic = {}
     for (source_key, target_val) in dic.items():
         alignments_sum = sum(target_val.values())
@@ -39,6 +36,14 @@ def save_clean_dic(main_dir, file_name, min_amount, min_precent):
                             in target_val.items() if alignment_val > min_val}
         if clean_target_val:
             clean_dic[source_key] = clean_target_val
+    return clean_dic
+
+
+def save_clean_dic(main_dir, file_name, min_amount, min_precent):
+    file_path = os.path.join(main_dir, file_name + ".json")
+    with open(file_path, "r") as json_file:
+        dic = json.load(json_file)
+    clean_dic = get_clean_dic(dic, min_amount, min_precent)
     output_path = os.path.join(main_dir, file_name + "_clean.json")
     with open(output_path, "w") as outfile:
         json.dump(clean_dic, outfile)
