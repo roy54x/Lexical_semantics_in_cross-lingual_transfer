@@ -132,7 +132,7 @@ This code yields the following colexification graph, which captures the polysemi
 ```sql
 @article{ilani-et-al-2024,
   title={Assessing the Role of Lexical Semantics in Cross-lingual Transfer through Controlled Manipulations},
-  author={Roy ilani and Taelin Karidi and Omri Abend},
+  author={Ilani, Roy and Karidi, Taelin and Abend, Omri},
   journal={arXiv preprint arXiv:2408.07599v1},
   year={2024}
 }
