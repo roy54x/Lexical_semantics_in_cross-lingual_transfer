@@ -121,7 +121,7 @@ words_to_display = ["about", "above", "across", "after", "against", "along", "am
 keys_to_extract = set()
 for word in words_to_display:
     keys_to_extract.update(get_colexifications(bipartite_graph, inverse_bipartite_graph, word))
-bipartite_graph = {key: bipartite_graph[key] for key in keys_to_extract if key in lemmas_dic}
+bipartite_graph = {key: bipartite_graph[key] for key in keys_to_extract if key in bipartite_graph}
 
 G = get_colexification_graph(bipartite_graph)
 plot_graph(G)
