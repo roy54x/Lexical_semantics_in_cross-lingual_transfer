@@ -75,17 +75,14 @@ with open(file_path, "w") as outfile:
 ```
 
 ## Calculating Translation Entropy
-<img src="https://github.com/user-attachments/assets/715476e6-a699-4c80-b112-b18c208161eb" alt="Bipartite Graph Example" width="500">
+<img src="https://github.com/user-attachments/assets/715476e6-a699-4c80-b112-b18c208161eb" alt="Bipartite Graph Example" width="400">
 
 ### Explanation
-To further appreciate the impact of the divergence between the source and the target lexicons, we introduce the concept of \textit{translation entropy}. Let $G$ be the weighted bipartite graph presented earlier, we compute the entropy for each vertex $v$ in the graph:\footnote{It does not matter whether $v\in L_s$ or $v\in L_t$.}
-\begin{equation}
-e(v) = -\sum_{u\in U_{v}}p_{v}(u)log(p_{v}(u))
-\label{eq:entropy}
-\end{equation}
+To further appreciate the impact of the divergence between the source and the target lexicons, we introduce the concept of \textit{translation entropy}. Let $G$ be the weighted bipartite graph presented earlier, we compute the entropy for each vertex $v$ in the graph:
+
+<img src="https://github.com/user-attachments/assets/85471caf-3056-4b6a-bdf7-e7badb440f2a" alt="Bipartite Graph Example" width="100">
+
 where $U_{v}$ is the subset of vertices linked to $v$, and $p_{v}$ is the following probability function:
-\begin{equation}
-p_{v}(u)=\frac{w(v,u)}{\sum_{u^\prime\in U_{v}}w(v,u^\prime)}
-\label{eq:probability-function}
-\end{equation}
+
+<img src="https://github.com/user-attachments/assets/495e9700-4634-4ef3-87a8-dbd9acdaf01d" alt="Bipartite Graph Example" width="100">
 
