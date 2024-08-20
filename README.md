@@ -88,6 +88,8 @@ where $U_{v}$ is the subset of vertices linked to $v$, and $p_{v}$ is the follow
 
 <img src="https://github.com/user-attachments/assets/495e9700-4634-4ef3-87a8-dbd9acdaf01d" alt="Bipartite Graph Example" width="250">
 
+### Code Example
+
 To extract the translation entopy values, use: 
 
 ```python
@@ -97,5 +99,9 @@ get_entropies(main_dir, file_name, to_json=False)
 ```
 This code will produce a csv file such as: 
 
-<img src="https://github.com/user-attachments/assets/e00b82f4-2fc7-401f-959f-538fa984d2dd" alt="Bipartite Graph Example" width="350">
+<img src="https://github.com/user-attachments/assets/e00b82f4-2fc7-401f-959f-538fa984d2dd" alt="Bipartite Graph Example" width="300">
+
+## Generating the Colexification Graph
+
+Additionally, the bipartite graph can be used to generate a colexification graph. Colexification refers to the phenomenon where different meanings are expressed by the same word (i.e., 'co-lexified') in a language (from https://en.wikipedia.org/wiki/Colexification).
 
