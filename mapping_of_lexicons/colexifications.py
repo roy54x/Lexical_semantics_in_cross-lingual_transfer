@@ -6,10 +6,6 @@ import matplotlib.pyplot as plt
 
 from mapping_of_lexicons.graph_utils import get_inverse_dic
 
-sys.path.insert(0, r"C:\Users\RoyIlani\pythonProject\Lexical_semantics_in_cross-lingual_transfer")
-
-
-
 def get_colexification_graph(dic):
     inverse_dic = get_inverse_dic(dic)
     G = nx.DiGraph()

@@ -5,7 +5,7 @@ from collections import Counter
 
 import simalign
 
-from tokenize_sentences import tokenize_sentences, light_tokenize_sentences
+from mapping_of_lexicons.tokenize_sentences import tokenize_sentences, light_tokenize_sentences
 
 
 def create_bipartite_graph(source_sentences, target_sentences, source_language="english", target_language="spanish",
