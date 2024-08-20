@@ -103,5 +103,9 @@ This code will produce a csv file such as:
 
 ## Generating the Colexification Graph
 
-Additionally, the bipartite graph can be used to generate a colexification graph. Colexification refers to the phenomenon where different meanings are expressed by the same word (i.e., 'co-lexified') in a language [wikipedia](https://en.wikipedia.org/wiki/Colexification), and a colexification graph captures these relationships by connecting words that share meanings across different contexts.
+Additionally, the bipartite graph can be used to generate a colexification graph. Colexification refers to the phenomenon where different meanings are expressed by the same word in a language ([wikipedia](https://en.wikipedia.org/wiki/Colexification)), and a colexification graph captures these relationships by connecting words that share meanings across different contexts. The mapping of the two lexicons enable us to identify words in the source language which share the same translation in the target language, thus allowing us to generate a colexification graph of the source language. Combining graphs from more than one language pair may further enrich the colexification graph.
+
+### Code Example
+
+
 
