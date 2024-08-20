@@ -9,6 +9,7 @@ This repository provides the code to map lexicons of two languages, as discussed
 4. [Filtering the Graph](#filtering-the-graph)
 5. [Calculating Translation Entropy](#calculating-translation-entropy)
 6. [Generating the Colexification Graph](#generating-the-colexification-graph)
+7. [References](#references)
 
 ## Installation
 
@@ -127,3 +128,12 @@ This code yields the following colexification graph, which captures the polysemi
 
 ![colexification graph](https://github.com/user-attachments/assets/6026c9d7-7ffb-4b37-a86a-c640232499f3)
 
+# References
+```sql
+@article{ilani-et-al-2024,
+  title={Assessing the Role of Lexical Semantics in Cross-lingual Transfer through Controlled Manipulations},
+  author={Roy ilani and Taelin Karidi and Omri Abend},
+  journal={arXiv preprint arXiv:2408.07599v1},
+  year={2024}
+}
+```
