@@ -6,8 +6,9 @@ This repository provides the code to map lexicons of two languages, as discussed
 1. [Installation](#installation)
 2. [Download Bitext](#Download-bitext)
 3. [Extracting the Bipartite Graph](#extracting-the-bipartite-graph)
-4. [Calculating Translation Entropy](#calculating-translation-entropy)
-5. [Generating the Colexification Graph](#generating-the-colexification-graph)
+4. [Filtering the Graph](#filtering-the-graph)
+5. [Calculating Translation Entropy](#calculating-translation-entropy)
+6. [Generating the Colexification Graph](#generating-the-colexification-graph)
 
 ## Installation
 
@@ -54,4 +55,18 @@ create_bipartite_graph(source_sentences, target_sentences, source_language="engl
                            output_file_name="europarl_en-es_alignments")
 ```
 
+## Filtering the Graph
 
+After we extract the graph, we filter out edges whose weights do not exceed a certain threshold or are relatively small compared to other edges originating from the same vertex. The filtering can be done with the following code:
+
+```python
+from mapping_of_lexicons.graph_utils import get_clean_dic, get_inverse_dic
+
+file_name = "europarl_en-es_alignments" # Replace with the file name
+file_path = os.path.join(main_dir, file_name + ".json")
+    with open(file_path, "r") as json_file:
+        graph = json.load(json_file)
+
+clean_graph = get_clean_dic(graph) # filter edges based on source vertices
+clean_graph = get_inverse_dic(get_clean_dic(get_inverse_dic(clean_graph))) # filter edges based on target vertices
+```
