@@ -8,7 +8,7 @@ This repository provides the code to map lexicons of two languages, as discussed
 3. [Extracting the Bipartite Graph](#extracting-the-bipartite-graph)
 4. [Filtering the Graph](#filtering-the-graph)
 5. [Calculating Translation Entropy](#calculating-translation-entropy)
-6. [Generating a_Colexification Graph](#generating-a-colexification-graph)
+6. [Generating a Colexification Graph](#generating-a-colexification-graph)
 7. [References](#references)
 
 ## Installation
