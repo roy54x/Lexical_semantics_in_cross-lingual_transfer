@@ -8,7 +8,7 @@ This repository provides the code to map lexicons of two languages, as discussed
 3. [Extracting the Bipartite Graph](#extracting-the-bipartite-graph)
 4. [Filtering the Graph](#filtering-the-graph)
 5. [Calculating Translation Entropy](#calculating-translation-entropy)
-6. [Generating the Colexification Graph](#generating-the-colexification-graph)
+6. [Generating a_Colexification Graph](#generating-a-colexification-graph)
 7. [References](#references)
 
 ## Installation
@@ -102,7 +102,7 @@ This code will produce a csv file such as:
 
 <img src="https://github.com/user-attachments/assets/e00b82f4-2fc7-401f-959f-538fa984d2dd" alt="Bipartite Graph Example" width="300">
 
-## Generating the Colexification Graph
+## Generating a Colexification Graph
 
 Additionally, the bipartite graph can be used to generate a colexification graph. Colexification refers to the phenomenon where different meanings are expressed by the same word in a language ([wikipedia](https://en.wikipedia.org/wiki/Colexification)), and a colexification graph captures these relationships by connecting words that share meanings across different contexts. The mapping of the two lexicons enable us to identify words in the source language which share the same translation in the target language, thus allowing us to generate a colexification graph of the source language. Combining graphs from more than one language pair may further enrich the colexification graph.
 
