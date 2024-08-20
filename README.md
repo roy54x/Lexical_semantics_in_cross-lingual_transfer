@@ -82,11 +82,9 @@ with open(file_path, "w") as outfile:
 
 ### Explanation
 To further appreciate the impact of the divergence between the source and the target lexicons, we introduce the concept of \textit{translation entropy}. Let $G$ be the weighted bipartite graph presented earlier, we compute the entropy for each vertex $v$ in the graph:
-
 <img src="https://github.com/user-attachments/assets/85471caf-3056-4b6a-bdf7-e7badb440f2a" alt="Bipartite Graph Example" width="250">
 
 where $U_{v}$ is the subset of vertices linked to $v$, and $p_{v}$ is the following probability function:
-
 <img src="https://github.com/user-attachments/assets/495e9700-4634-4ef3-87a8-dbd9acdaf01d" alt="Bipartite Graph Example" width="250">
 
 ### Code Example
