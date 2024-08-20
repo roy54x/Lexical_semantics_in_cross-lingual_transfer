@@ -111,18 +111,19 @@ from mapping_of_lexicons.colexifications import get_colexifications, get_colexif
 
 with open(os.path.join(main_dir, file_name, ".json"), "r") as json_file:
     bipartite_graph = json.load(json_file)
-inverse_bipartite_graph = get_inverse_dic(bipartite_graph)
 words_to_display = ["about", "above", "across", "after", "against", "along", "among", "around", "at", "before",
                        "behind", "below", "beneath", "beside", "between", "beyond", "but", "by", "concerning",
                        "considering", "despite", "down", "during", "except", "for", "from", "in", "inside", "into",
                        "like", "near", "of", "off", "on", "onto", "out", "outside", "over", "past", "regarding",
                        "round", "since", "through", "throughout", "to", "toward", "under", "underneath", "until",
                        "unto", "up", "upon", "with", "within", "without"]
-keys_to_extract = set()
-for word in words_to_display:
-    keys_to_extract.update(get_colexifications(bipartite_graph, inverse_bipartite_graph, word))
-bipartite_graph = {key: bipartite_graph[key] for key in keys_to_extract if key in bipartite_graph}
+bipartite_graph = {key: bipartite_graph[key] for key in words_to_display if key in bipartite_graph}
 
 G = get_colexification_graph(bipartite_graph)
 plot_graph(G)
 ```
+
+This code yields the following colexification graph, which captures the polysemies between English and Spanish (note the connection between "for" and "by" which derives from figure 1):
+
+![colexification graph](https://github.com/user-attachments/assets/6026c9d7-7ffb-4b37-a86a-c640232499f3)
+
