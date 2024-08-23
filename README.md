@@ -23,7 +23,7 @@ pip install -r requirements.txt
 
 ## Download Bitext
 
-Download a parallel corpus for the two languages you wish to map their lexicons. For example, if you want to map two European languages, you can use the Europarl corpus available at https://www.statmt.org/europarl/.
+Download a parallel corpus for the two languages you wish to map their lexicons. For example, if you want to map two European languages, you can use the [Europarl](https://www.statmt.org/europarl/) corpus.
 
 ## Extracting the Bipartite Graph
 <img src="https://github.com/user-attachments/assets/6e755d32-4ab2-44d5-a05a-f014446f2cb3" alt="Bipartite Graph Example" width="400">
@@ -33,7 +33,7 @@ The bipartite graph represents the mapping between the lexicons of two languages
 
 - $V_s$ is the set of words in the lexicon of $L_s$,
 - $V_t$ is the set of words in the lexicon of $L_t$,
-- $E$ is the set of edges where a pair $(v, u) \in V_s \times V_t$ exists if the word $v$ in $L_s$ is aligned with the word $u$ in $L_t$ in at least one instance in the bitext,
+- $E$ is the set of edges where a pair $(v, u) \in V_s \times V_t$ exists if the word $v \in L_s$ is aligned with the word $u \in L_t$ in at least one instance in the bitext,
 - $w:E \rightarrow \mathbb{N}^+$ is a weight function assigning the number of times each word pair is aligned in the bitext.
 
 ### Code Example
@@ -81,7 +81,7 @@ with open(file_path, "w") as outfile:
 <img src="https://github.com/user-attachments/assets/715476e6-a699-4c80-b112-b18c208161eb" alt="Bipartite Graph Example" width="400">
 
 ### Explanation
-To further appreciate the impact of the divergence between the source and the target lexicons, we introduce the concept of \textit{translation entropy}. Let $G$ be the weighted bipartite graph presented earlier, we compute the entropy for each vertex $v$ in the graph:
+To further appreciate the impact of the divergence between the source and the target lexicons, we introduce the concept of *translation entropy*. Let $G$ be the weighted bipartite graph presented earlier, we compute the entropy for each vertex $v$ in the graph:
 
 <img src="https://github.com/user-attachments/assets/85471caf-3056-4b6a-bdf7-e7badb440f2a" alt="Bipartite Graph Example" width="250">
 
